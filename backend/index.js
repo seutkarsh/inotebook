@@ -12,6 +12,10 @@ app.get('/',(req,res)=>{
 console.log("Hello World")
 });
 
+
+// app.use('/api/auth',require('./routes/auth'))
+// app.use('/api/notes',require('./routes/notes'))
+
 app.listen(port,()=>{
     console.log(`Listening on http://localhost:${port}`);
 })
