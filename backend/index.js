@@ -8,9 +8,7 @@ connectToDatabase();
 //Middlewares
 app.use(express.json());
 const port = 5000;
-app.get("/", (req, res) => {
-  console.log("Hello World");
-});
+app.get("/", (req, res) => {});
 
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/notes", require("./routes/notes"));
