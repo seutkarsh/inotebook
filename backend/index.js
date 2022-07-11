@@ -1,10 +1,13 @@
 //Module Imports
 const connectToDatabase = require("./db");
+const cors = require("cors");
 const express = require("express");
 const app = express();
 
 connectToDatabase();
 
+//to resolve cors error
+app.use(cors());
 //Middlewares
 app.use(express.json());
 const port = 5000;
