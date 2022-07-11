@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import NoteContext from "../context/NoteContext";
 import NoteItem from "./NoteItem";
 
-const Notes = () => {
+const Notes = (props) => {
+  const navigate = useNavigate();
   const context = useContext(NoteContext);
   const { notes, getNotes, editNote } = context;
   //state for input fields
@@ -14,7 +16,13 @@ const Notes = () => {
   });
 
   useEffect(() => {
-    getNotes();
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      getNotes();
+    } else {
+      navigate("/login");
+    }
     //eslint-disable-next-line
   }, []);
 
@@ -68,6 +76,7 @@ const Notes = () => {
               ></button>
             </div>
             <div className="modal-body">
+              {/* start of form */}
               <form className="my-3">
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">
@@ -121,6 +130,7 @@ const Notes = () => {
                 Close
               </button>
               <button
+                disabled={note.title.length < 3 || note.description.length < 5}
                 type="button"
                 className="btn btn-primary"
                 onClick={submitHandler}
@@ -132,6 +142,9 @@ const Notes = () => {
         </div>
       </div>
       <h2>Your Notes</h2>
+      <div className="container my-2">
+        <h5>{notes.length === 0 && "No Notes Yet. Create one now!!!"}</h5>
+      </div>
       {notes.map((note) => {
         return (
           <NoteItem

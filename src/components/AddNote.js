@@ -16,6 +16,7 @@ const AddNote = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.title);
+    setnote({ title: "", description: "", tag: "" });
   };
 
   return (
@@ -33,6 +34,9 @@ const AddNote = () => {
             id="title"
             name="title"
             onChange={inputHandler}
+            required
+            minLength={3}
+            value={note.title}
           />
         </div>
         <div className="mb-3">
@@ -45,6 +49,9 @@ const AddNote = () => {
             id="description"
             name="description"
             onChange={inputHandler}
+            required
+            minLength={5}
+            value={note.description}
           />
         </div>
         <div className="mb-3">
@@ -57,6 +64,7 @@ const AddNote = () => {
             id="tag"
             name="tag"
             onChange={inputHandler}
+            value={note.tag}
           />
         </div>
 
